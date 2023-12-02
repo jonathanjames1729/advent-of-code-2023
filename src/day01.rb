@@ -30,3 +30,5 @@ class Day01 < Base
     names_to_digits.fetch(digit.to_sym, digit)
   end
 end
+
+ONE = Day01.new
