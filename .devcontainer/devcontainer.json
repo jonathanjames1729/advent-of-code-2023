@@ -19,5 +19,6 @@
             }
         }
     },
-    "initializeCommand": ".devcontainer/initialize.sh"
+    "initializeCommand": ".devcontainer/initialize.sh",
+    "postCreateCommand": "bundle install"
 }
