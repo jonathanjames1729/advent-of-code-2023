@@ -1,0 +1,5 @@
+FROM moby/buildkit:latest
+
+COPY 'netskope.crt' '/usr/local/share/ca-certificates/netskope.crt'
+COPY 'goskope.crt' '/usr/local/share/ca-certificates/goskope.crt'
+RUN update-ca-certificates

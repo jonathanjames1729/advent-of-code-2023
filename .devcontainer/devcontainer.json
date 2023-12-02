@@ -1,0 +1,23 @@
+{
+    "name": "Advent of Code 2023",
+    "image": "aoc_2023_devcontainer",
+    "runArgs": [
+        "--network=aoc_2023"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "rebornix.Ruby",
+                "castwide.solargraph"
+            ],
+            "settings": {
+                "solargraph": {
+                    "diagnostics": true,
+                    "formatting": true,
+                    "useBunder": true
+                }
+            }
+        }
+    },
+    "initializeCommand": ".devcontainer/initialize.sh"
+}
