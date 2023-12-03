@@ -20,5 +20,7 @@
         }
     },
     "initializeCommand": ".devcontainer/initialize.sh",
-    "postCreateCommand": "bundle install"
+    "postCreateCommand": "setup CREATE",
+    "postStartCommand": "setup START",
+    "postAttachCommand": "setup ATTACH"
 }
