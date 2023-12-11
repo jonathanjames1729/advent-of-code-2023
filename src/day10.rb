@@ -3,18 +3,6 @@
 require_relative 'base'
 
 class Day10 < Base
-  def part1
-    data => {start_location:, tiles:}
-    start_location => [x, y]
-    direction = populate_start(x, y, tiles).first
-    path = []
-    while path.empty? || (start_location[0] != x) || (start_location[1] != y)
-      path << [x, y].freeze
-      next_location(x, y, direction, tiles) => [x, y, direction]
-    end
-    path.count / 2
-  end
-
   TILE_MAP = {
     '|' => %i[north south].freeze,
     '-' => %i[west east].freeze,
@@ -26,12 +14,36 @@ class Day10 < Base
     '.' => nil
   }.freeze
 
+  def part1
+    data => {tiles:, start: [start_x, start_y]}
+    find_loop(start_x, start_y, tiles).count / 2
+  end
+
+  def part2
+    data => {tiles:, start: [start_x, start_y]}
+    loop_path = find_loop(start_x, start_y, tiles)
+    north = [[]] * tiles.first.count
+    count = 0
+    tiles.each_with_index do |row, y|
+      west = []
+      row.each_with_index do |tile, x|
+        if loop_path.include?([x, y])
+          north[x] = symmetric_difference(north[x], tile, TILE_MAP['-'])
+          west = symmetric_difference(west, tile, TILE_MAP['|'])
+        else
+          count += north[x].empty? || west.empty? ? 0 : 1
+        end
+      end
+    end
+    count
+  end
+
   def data
-    result = { start_location: nil, tiles: [] }
+    result = { tiles: [], start: nil }
     super.each_with_index do |line, y|
       row = []
       line.chars.each_with_index do |tile_char, x|
-        result[:start_location] = [x, y].freeze if tile_char == 'S'
+        result[:start] = [x, y].freeze if tile_char == 'S'
         row << TILE_MAP[tile_char]
       end
       result[:tiles] << row
@@ -40,6 +52,18 @@ class Day10 < Base
   end
 
   private
+
+  def find_loop(start_x, start_y, tiles)
+    direction = populate_start(start_x, start_y, tiles).first
+    x = start_x
+    y = start_y
+    path = []
+    while path.empty? || (x != start_x) || (y != start_y)
+      path << [x, y].freeze
+      next_location(x, y, direction, tiles) => [x, y, direction]
+    end
+    path
+  end
 
   DIRECTION_TRANSFORM_MAP = {
     north: ->(x, y) { [x, y - 1, :south] },
@@ -63,6 +87,11 @@ class Day10 < Base
   def next_location(location_x, location_y, direction, tiles)
     DIRECTION_TRANSFORM_MAP[direction].call(location_x, location_y) => [next_x, next_y, direction_to_exclude]
     [next_x, next_y, tiles[next_y][next_x].find { |d| d != direction_to_exclude }]
+  end
+
+  def symmetric_difference(current, tile, mask)
+    masked = tile.intersection(mask)
+    current.union(masked).difference(current.intersection(masked))
   end
 end
 
