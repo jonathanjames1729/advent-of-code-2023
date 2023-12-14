@@ -43,3 +43,4 @@ class Day05 < Base
 end
 
 FIVE = Day05.new
+FIVE_TEST = Day05.new('test')

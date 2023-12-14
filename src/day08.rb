@@ -33,3 +33,4 @@ class Day08 < Base
 end
 
 EIGHT = Day08.new
+EIGHT_TEST = Day08.new('test')

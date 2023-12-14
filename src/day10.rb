@@ -96,3 +96,4 @@ class Day10 < Base
 end
 
 TEN = Day10.new
+TEN_TEST = Day10.new('test')

@@ -57,3 +57,4 @@ class Day03 < Base
 end
 
 THREE = Day03.new
+THREE_TEST = Day03.new('test')

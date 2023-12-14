@@ -32,3 +32,4 @@ class Day01 < Base
 end
 
 ONE = Day01.new
+ONE_TEST = Day01.new('test')

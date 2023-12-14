@@ -48,3 +48,4 @@ class Day06 < Base
 end
 
 SIX = Day06.new
+SIX_TEST = Day06.new('test')

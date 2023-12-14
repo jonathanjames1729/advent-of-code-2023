@@ -40,3 +40,4 @@ class Day02 < Base
 end
 
 TWO = Day02.new
+TWO_TEST = Day02.new('test')

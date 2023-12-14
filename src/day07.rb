@@ -86,3 +86,4 @@ class Day07 < Base
 end
 
 SEVEN = Day07.new
+SEVEN_TEST = Day07.new('test')
